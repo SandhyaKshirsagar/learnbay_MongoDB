@@ -1,0 +1,730 @@
+Last login: Tue Jul 23 21:38:55 on ttys002
+(base) sandhyakshirsagar@sandhyas-mbp ~ % ~/mongodb-macos-x86_64-7.0.12/bin/mongosh
+Current Mongosh Log ID:	669fd6569f12b3c7aea8e2ed
+Connecting to:		mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.2.12
+Using MongoDB:		7.0.12
+Using Mongosh:		2.2.12
+
+For mongosh info see: https://docs.mongodb.com/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-07-19T15:32:57.826+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+   2024-07-19T15:32:57.826+05:30: You are running this process as the root user, which is not recommended
+   2024-07-19T15:32:57.826+05:30: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+   2024-07-19T15:32:57.827+05:30: Soft rlimits for open file descriptors too low
+------
+
+test> use leanbay;
+switched to db leanbay
+leanbay> use learnbay;
+learnbay> db.food_item.insertMany([ { name:"Chips", calories:500, brand:"Lays", category:"Snack", price:50 }, { name:"chocolate", calories:800, brand:"Hersheys", category:"Snack", price:150}, {name:"Ice_Cream", calories:1000, brand:"Cream_Stone", category:"Snack", price:500}, {name:"Pizza", calories:1200, brand:"Dominos", category:"meals", price:300}, {name:"noodles", calories:800, brand:"Maggi", category:"Meals", price:50} ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('669fd98f9f12b3c7aea8e2ee'),
+    '1': ObjectId('669fd98f9f12b3c7aea8e2ef'),
+    '2': ObjectId('669fd98f9f12b3c7aea8e2f0'),
+    '3': ObjectId('669fd98f9f12b3c7aea8e2f1'),
+    '4': ObjectId('669fd98f9f12b3c7aea8e2f2')
+  }
+}
+learnbay> db.food_item.insertOne({name:"mango_juice", calories:200, brand:"Tropicana", category:"Juice", price:280});
+{
+  acknowledged: true,
+  insertedId: ObjectId('669fd9f99f12b3c7aea8e2f3')
+}
+learnbay> db.food_item.insertOne({name:"coconut_water", calories:100, brand:"Paper_Boat", category:"Juice", price:80});
+{
+  acknowledged: true,
+  insertedId: ObjectId('669fda8b9f12b3c7aea8e2f4')
+}
+learnbay> db.food_item.insertOne({name:"coke", calories:150, brand:"Coca_cola", category:"Juice", price:120});
+{
+  acknowledged: true,
+  insertedId: ObjectId('669fdab39f12b3c7aea8e2f5')
+}
+learnbay> db.food_item.find();
+[
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ee'),
+    name: 'Chips',
+    calories: 500,
+    brand: 'Lays',
+    category: 'Snack',
+    price: 50
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ef'),
+    name: 'chocolate',
+    calories: 800,
+    brand: 'Hersheys',
+    category: 'Snack',
+    price: 150
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f0'),
+    name: 'Ice_Cream',
+    calories: 1000,
+    brand: 'Cream_Stone',
+    category: 'Snack',
+    price: 500
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f1'),
+    name: 'Pizza',
+    calories: 1200,
+    brand: 'Dominos',
+    category: 'meals',
+    price: 300
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f2'),
+    name: 'noodles',
+    calories: 800,
+    brand: 'Maggi',
+    category: 'Meals',
+    price: 50
+  },
+  {
+    _id: ObjectId('669fd9f99f12b3c7aea8e2f3'),
+    name: 'mango_juice',
+    calories: 200,
+    brand: 'Tropicana',
+    category: 'Juice',
+    price: 280
+  },
+  {
+    _id: ObjectId('669fda8b9f12b3c7aea8e2f4'),
+    name: 'coconut_water',
+    calories: 100,
+    brand: 'Paper_Boat',
+    category: 'Juice',
+    price: 80
+  },
+  {
+    _id: ObjectId('669fdab39f12b3c7aea8e2f5'),
+    name: 'coke',
+    calories: 150,
+    brand: 'Coca_cola',
+    category: 'Juice',
+    price: 120
+  }
+]
+learnbay> db.food_item.count();
+DeprecationWarning: Collection.count() is deprecated. Use countDocuments or estimatedDocumentCount.
+8
+learnbay> db.createCollection("restaurent");
+{ ok: 1 }
+learnbay> db.restaurent.insertMany([ { name:"Dominos", year:1960, location:"michigan", contact:18002081234, email:"james@dominospizza.com", nos_of_days_open:7, city:"ypsilanti", category:"meals", serving:"takeaway" }, {name:"paradise_biryani", year:1953, location:"Hyderabad", contact:04027897865, email:"info@paradisefoodcourt.in", nos_of_days_open:7, city:"Hyderabad", category:"meals", serving:"dinning"}, {name:"Starbucks", year:1980, location:"India",contact:18002223568, email:"info@starbucks.com", nos_of_days_open:7, city:"Mumbai", category:"juices", serving:"dinning" }, {name:"Drunken_Monkey", year:2005, location:"India",contact:800764987, email:"info@drunkenmonkey.com", nos_of_days_open:6, city:"Mumbai", category:"juices", serving:"takeaway" }, {name:"karachi_bakery", year:1970, location:"India",contact:9765498234, email:"info@karachi.com", nos_of_days_open:5, city:"Hyderabad", category:"snacks", serving:"takeway" }, {name:"Punjab_grill", year:2000, location:"India",contact:7456738922, email:"info@punjabgrill.com", nos_of_days_open:6, city:"Delhi", category:"buffet", serving:"dinning" } ]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('669fe05d9f12b3c7aea8e2f6'),
+    '1': ObjectId('669fe05d9f12b3c7aea8e2f7'),
+    '2': ObjectId('669fe05d9f12b3c7aea8e2f8'),
+    '3': ObjectId('669fe05d9f12b3c7aea8e2f9'),
+    '4': ObjectId('669fe05d9f12b3c7aea8e2fa'),
+    '5': ObjectId('669fe05d9f12b3c7aea8e2fb')
+  }
+}
+learnbay> db.restaurent.insertOne({name:"Haldirams", year:1990, location:"Noida",contact:9977553322, email:"info@haldirams.com", nos_of_days_open:5, city:"Delhi", category:"snacks", serving:"takeaway"});
+{
+  acknowledged: true,
+  insertedId: ObjectId('669fe13f9f12b3c7aea8e2fc')
+}
+learnbay> db.restaurent.insertOne({name:"pizza_hut", year:1995, location:"chandini_chowk",contact:8547639287, email:"info@pizzahut.com", nos_of_days_open:7, city:"Delhi", category:"meals", serving:"dinning"});
+{
+  acknowledged: true,
+  insertedId: ObjectId('669fe1fb9f12b3c7aea8e2fd')
+}
+learnbay> db.restaurents.find();
+
+learnbay> db.restaurent.find();
+[
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2f6'),
+    name: 'Dominos',
+    year: 1960,
+    location: 'michigan',
+    contact: 18002081234,
+    email: 'james@dominospizza.com',
+    nos_of_days_open: 7,
+    city: 'ypsilanti',
+    category: 'meals',
+    serving: 'takeaway'
+  },
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2f7'),
+    name: 'paradise_biryani',
+    year: 1953,
+    location: 'Hyderabad',
+    contact: 4027897865,
+    email: 'info@paradisefoodcourt.in',
+    nos_of_days_open: 7,
+    city: 'Hyderabad',
+    category: 'meals',
+    serving: 'dinning'
+  },
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2f8'),
+    name: 'Starbucks',
+    year: 1980,
+    location: 'India',
+    contact: 18002223568,
+    email: 'info@starbucks.com',
+    nos_of_days_open: 7,
+    city: 'Mumbai',
+    category: 'juices',
+    serving: 'dinning'
+  },
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2f9'),
+    name: 'Drunken_Monkey',
+    year: 2005,
+    location: 'India',
+    contact: 800764987,
+    email: 'info@drunkenmonkey.com',
+    nos_of_days_open: 6,
+    city: 'Mumbai',
+    category: 'juices',
+    serving: 'takeaway'
+  },
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2fa'),
+    name: 'karachi_bakery',
+    year: 1970,
+    location: 'India',
+    contact: 9765498234,
+    email: 'info@karachi.com',
+    nos_of_days_open: 5,
+    city: 'Hyderabad',
+    category: 'snacks',
+    serving: 'takeway'
+  },
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2fb'),
+    name: 'Punjab_grill',
+    year: 2000,
+    location: 'India',
+    contact: 7456738922,
+    email: 'info@punjabgrill.com',
+    nos_of_days_open: 6,
+    city: 'Delhi',
+    category: 'buffet',
+    serving: 'dinning'
+  },
+  {
+    _id: ObjectId('669fe13f9f12b3c7aea8e2fc'),
+    name: 'Haldirams',
+    year: 1990,
+    location: 'Noida',
+    contact: 9977553322,
+    email: 'info@haldirams.com',
+    nos_of_days_open: 5,
+    city: 'Delhi',
+    category: 'snacks',
+    serving: 'takeaway'
+  },
+  {
+    _id: ObjectId('669fe1fb9f12b3c7aea8e2fd'),
+    name: 'pizza_hut',
+    year: 1995,
+    location: 'chandini_chowk',
+    contact: 8547639287,
+    email: 'info@pizzahut.com',
+    nos_of_days_open: 7,
+    city: 'Delhi',
+    category: 'meals',
+    serving: 'dinning'
+  }
+]
+learnbay> db.restaurent.count();
+8
+learnbay> db.food_item.find({$category:"Juice"});
+MongoServerError[BadValue]: unknown top level operator: $category. If you have a field name that starts with a '$' symbol, consider using $getField or $setField.
+learnbay> db.food_item.find({category:"Juice"});
+[
+  {
+    _id: ObjectId('669fd9f99f12b3c7aea8e2f3'),
+    name: 'mango_juice',
+    calories: 200,
+    brand: 'Tropicana',
+    category: 'Juice',
+    price: 280
+  },
+  {
+    _id: ObjectId('669fda8b9f12b3c7aea8e2f4'),
+    name: 'coconut_water',
+    calories: 100,
+    brand: 'Paper_Boat',
+    category: 'Juice',
+    price: 80
+  },
+  {
+    _id: ObjectId('669fdab39f12b3c7aea8e2f5'),
+    name: 'coke',
+    calories: 150,
+    brand: 'Coca_cola',
+    category: 'Juice',
+    price: 120
+  }
+]
+learnbay> db.restaurent.find({city:"Delhi", city:"Mumbai"});
+[
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2f8'),
+    name: 'Starbucks',
+    year: 1980,
+    location: 'India',
+    contact: 18002223568,
+    email: 'info@starbucks.com',
+    nos_of_days_open: 7,
+    city: 'Mumbai',
+    category: 'juices',
+    serving: 'dinning'
+  },
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2f9'),
+    name: 'Drunken_Monkey',
+    year: 2005,
+    location: 'India',
+    contact: 800764987,
+    email: 'info@drunkenmonkey.com',
+    nos_of_days_open: 6,
+    city: 'Mumbai',
+    category: 'juices',
+    serving: 'takeaway'
+  }
+]
+learnbay> db.restaurent.find({city:"Delhi"}, city:"Mumbai"});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:39)
+
+> 1 | db.restaurent.find({city:"Delhi"}, city:"Mumbai"});
+    |                                        ^
+  2 |
+
+learnbay> db.restaurent.find({city:"Delhi"}, {city:"Mumbai"});
+[
+  { _id: ObjectId('669fe05d9f12b3c7aea8e2fb'), city: 'Mumbai' },
+  { _id: ObjectId('669fe13f9f12b3c7aea8e2fc'), city: 'Mumbai' },
+  { _id: ObjectId('669fe1fb9f12b3c7aea8e2fd'), city: 'Mumbai' }
+]
+learnbay> db.restaurent.find({city:["Delhi","Mumbai"]});
+
+learnbay> db.restaurent.find({city:{$in :["Delhi","Mumbai"]}});
+[
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2f8'),
+    name: 'Starbucks',
+    year: 1980,
+    location: 'India',
+    contact: 18002223568,
+    email: 'info@starbucks.com',
+    nos_of_days_open: 7,
+    city: 'Mumbai',
+    category: 'juices',
+    serving: 'dinning'
+  },
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2f9'),
+    name: 'Drunken_Monkey',
+    year: 2005,
+    location: 'India',
+    contact: 800764987,
+    email: 'info@drunkenmonkey.com',
+    nos_of_days_open: 6,
+    city: 'Mumbai',
+    category: 'juices',
+    serving: 'takeaway'
+  },
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2fb'),
+    name: 'Punjab_grill',
+    year: 2000,
+    location: 'India',
+    contact: 7456738922,
+    email: 'info@punjabgrill.com',
+    nos_of_days_open: 6,
+    city: 'Delhi',
+    category: 'buffet',
+    serving: 'dinning'
+  },
+  {
+    _id: ObjectId('669fe13f9f12b3c7aea8e2fc'),
+    name: 'Haldirams',
+    year: 1990,
+    location: 'Noida',
+    contact: 9977553322,
+    email: 'info@haldirams.com',
+    nos_of_days_open: 5,
+    city: 'Delhi',
+    category: 'snacks',
+    serving: 'takeaway'
+  },
+  {
+    _id: ObjectId('669fe1fb9f12b3c7aea8e2fd'),
+    name: 'pizza_hut',
+    year: 1995,
+    location: 'chandini_chowk',
+    contact: 8547639287,
+    email: 'info@pizzahut.com',
+    nos_of_days_open: 7,
+    city: 'Delhi',
+    category: 'meals',
+    serving: 'dinning'
+  }
+]
+learnbay> db.food_item.updateOne({category:"Snacks"}, {$set:{price:256.99}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+learnbay> db.food_item.updateOne({category:"Snack"}, {$set:{price:256.99}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+learnbay> db.food_item.find({categoty:"Snack"});
+
+learnbay> db.food_item.find();
+[
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ee'),
+    name: 'Chips',
+    calories: 500,
+    brand: 'Lays',
+    category: 'Snack',
+    price: 256.99
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ef'),
+    name: 'chocolate',
+    calories: 800,
+    brand: 'Hersheys',
+    category: 'Snack',
+    price: 150
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f0'),
+    name: 'Ice_Cream',
+    calories: 1000,
+    brand: 'Cream_Stone',
+    category: 'Snack',
+    price: 500
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f1'),
+    name: 'Pizza',
+    calories: 1200,
+    brand: 'Dominos',
+    category: 'meals',
+    price: 300
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f2'),
+    name: 'noodles',
+    calories: 800,
+    brand: 'Maggi',
+    category: 'Meals',
+    price: 50
+  },
+  {
+    _id: ObjectId('669fd9f99f12b3c7aea8e2f3'),
+    name: 'mango_juice',
+    calories: 200,
+    brand: 'Tropicana',
+    category: 'Juice',
+    price: 280
+  },
+  {
+    _id: ObjectId('669fda8b9f12b3c7aea8e2f4'),
+    name: 'coconut_water',
+    calories: 100,
+    brand: 'Paper_Boat',
+    category: 'Juice',
+    price: 80
+  },
+  {
+    _id: ObjectId('669fdab39f12b3c7aea8e2f5'),
+    name: 'coke',
+    calories: 150,
+    brand: 'Coca_cola',
+    category: 'Juice',
+    price: 120
+  }
+]
+learnbay> db.food_item.find({category:"Snack"});
+[
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ee'),
+    name: 'Chips',
+    calories: 500,
+    brand: 'Lays',
+    category: 'Snack',
+    price: 256.99
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ef'),
+    name: 'chocolate',
+    calories: 800,
+    brand: 'Hersheys',
+    category: 'Snack',
+    price: 150
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f0'),
+    name: 'Ice_Cream',
+    calories: 1000,
+    brand: 'Cream_Stone',
+    category: 'Snack',
+    price: 500
+  }
+]
+learnbay> db.restaurent.updateOne({"city":"Delhi"}, {$set : {location:"New Delhi"}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+learnbay> db.restaurent.find({city:"Delhi"});
+[
+  {
+    _id: ObjectId('669fe05d9f12b3c7aea8e2fb'),
+    name: 'Punjab_grill',
+    year: 2000,
+    location: 'New Delhi',
+    contact: 7456738922,
+    email: 'info@punjabgrill.com',
+    nos_of_days_open: 6,
+    city: 'Delhi',
+    category: 'buffet',
+    serving: 'dinning'
+  },
+  {
+    _id: ObjectId('669fe13f9f12b3c7aea8e2fc'),
+    name: 'Haldirams',
+    year: 1990,
+    location: 'Noida',
+    contact: 9977553322,
+    email: 'info@haldirams.com',
+    nos_of_days_open: 5,
+    city: 'Delhi',
+    category: 'snacks',
+    serving: 'takeaway'
+  },
+  {
+    _id: ObjectId('669fe1fb9f12b3c7aea8e2fd'),
+    name: 'pizza_hut',
+    year: 1995,
+    location: 'chandini_chowk',
+    contact: 8547639287,
+    email: 'info@pizzahut.com',
+    nos_of_days_open: 7,
+    city: 'Delhi',
+    category: 'meals',
+    serving: 'dinning'
+  }
+]
+learnbay> db.food_item.find();
+[
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ee'),
+    name: 'Chips',
+    calories: 500,
+    brand: 'Lays',
+    category: 'Snack',
+    price: 256.99
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ef'),
+    name: 'chocolate',
+    calories: 800,
+    brand: 'Hersheys',
+    category: 'Snack',
+    price: 150
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f0'),
+    name: 'Ice_Cream',
+    calories: 1000,
+    brand: 'Cream_Stone',
+    category: 'Snack',
+    price: 500
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f1'),
+    name: 'Pizza',
+    calories: 1200,
+    brand: 'Dominos',
+    category: 'meals',
+    price: 300
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f2'),
+    name: 'noodles',
+    calories: 800,
+    brand: 'Maggi',
+    category: 'Meals',
+    price: 50
+  },
+  {
+    _id: ObjectId('669fd9f99f12b3c7aea8e2f3'),
+    name: 'mango_juice',
+    calories: 200,
+    brand: 'Tropicana',
+    category: 'Juice',
+    price: 280
+  },
+  {
+    _id: ObjectId('669fda8b9f12b3c7aea8e2f4'),
+    name: 'coconut_water',
+    calories: 100,
+    brand: 'Paper_Boat',
+    category: 'Juice',
+    price: 80
+  },
+  {
+    _id: ObjectId('669fdab39f12b3c7aea8e2f5'),
+    name: 'coke',
+    calories: 150,
+    brand: 'Coca_cola',
+    category: 'Juice',
+    price: 120
+  }
+]
+learnbay> db.food_item.deleteOne({brand:"Coca_cola"});
+{ acknowledged: true, deletedCount: 1 }
+learnbay> db.food_item.find();
+[
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ee'),
+    name: 'Chips',
+    calories: 500,
+    brand: 'Lays',
+    category: 'Snack',
+    price: 256.99
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ef'),
+    name: 'chocolate',
+    calories: 800,
+    brand: 'Hersheys',
+    category: 'Snack',
+    price: 150
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f0'),
+    name: 'Ice_Cream',
+    calories: 1000,
+    brand: 'Cream_Stone',
+    category: 'Snack',
+    price: 500
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f1'),
+    name: 'Pizza',
+    calories: 1200,
+    brand: 'Dominos',
+    category: 'meals',
+    price: 300
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f2'),
+    name: 'noodles',
+    calories: 800,
+    brand: 'Maggi',
+    category: 'Meals',
+    price: 50
+  },
+  {
+    _id: ObjectId('669fd9f99f12b3c7aea8e2f3'),
+    name: 'mango_juice',
+    calories: 200,
+    brand: 'Tropicana',
+    category: 'Juice',
+    price: 280
+  },
+  {
+    _id: ObjectId('669fda8b9f12b3c7aea8e2f4'),
+    name: 'coconut_water',
+    calories: 100,
+    brand: 'Paper_Boat',
+    category: 'Juice',
+    price: 80
+  }
+]
+learnbay> db.food_item.find({category:"Juice"});
+[
+  {
+    _id: ObjectId('669fd9f99f12b3c7aea8e2f3'),
+    name: 'mango_juice',
+    calories: 200,
+    brand: 'Tropicana',
+    category: 'Juice',
+    price: 280
+  },
+  {
+    _id: ObjectId('669fda8b9f12b3c7aea8e2f4'),
+    name: 'coconut_water',
+    calories: 100,
+    brand: 'Paper_Boat',
+    category: 'Juice',
+    price: 80
+  }
+]
+learnbay> db.food_item.deleteMany({category:"Juice"});
+{ acknowledged: true, deletedCount: 2 }
+learnbay> db.food_item.find();
+[
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ee'),
+    name: 'Chips',
+    calories: 500,
+    brand: 'Lays',
+    category: 'Snack',
+    price: 256.99
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2ef'),
+    name: 'chocolate',
+    calories: 800,
+    brand: 'Hersheys',
+    category: 'Snack',
+    price: 150
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f0'),
+    name: 'Ice_Cream',
+    calories: 1000,
+    brand: 'Cream_Stone',
+    category: 'Snack',
+    price: 500
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f1'),
+    name: 'Pizza',
+    calories: 1200,
+    brand: 'Dominos',
+    category: 'meals',
+    price: 300
+  },
+  {
+    _id: ObjectId('669fd98f9f12b3c7aea8e2f2'),
+    name: 'noodles',
+    calories: 800,
+    brand: 'Maggi',
+    category: 'Meals',
+    price: 50
+  }
+]
+learnbay> 
